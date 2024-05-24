@@ -1,0 +1,7 @@
+{
+  "name": "app-gestion-productos-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
