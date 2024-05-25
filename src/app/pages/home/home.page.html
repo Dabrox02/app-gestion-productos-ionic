@@ -1,0 +1,14 @@
+<ion-header class="smooth-border" [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Gestion de Productos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-buscador></app-buscador>
+  <app-lista-productos [productos]="productos$ | async"></app-lista-productos>
+</ion-content>
+
+<ion-footer>
+  <app-lista-acciones></app-lista-acciones>
+</ion-footer>

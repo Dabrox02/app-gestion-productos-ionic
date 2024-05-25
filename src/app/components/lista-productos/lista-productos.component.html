@@ -1,0 +1,15 @@
+<ion-accordion-group #accordionGroup>
+  <ion-accordion value="first">
+    <ion-item slot="header" color="light">
+      <ion-label>First Accordion</ion-label>
+    </ion-item>
+    <div class="ion-padding" slot="content">
+      First Content
+      @if (productos) {
+      @for (item of productos; track $index) {
+      <div>{{item.cantidad}}</div>
+      }
+      }
+    </div>
+  </ion-accordion>
+</ion-accordion-group>
