@@ -46,7 +46,8 @@ export class ProductoComponent {
   showUpdateProduct() {
     this.navCtrl.push(OperacionProductoPage, {
       operacion: "Editar Producto",
-      idProducto: this.producto.id
+      idProducto: this.producto.id,
+      producto: this.producto
     });
   }
 

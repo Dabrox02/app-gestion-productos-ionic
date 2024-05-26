@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AbstractControl, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonBackButton, IonButtons, IonInput, IonItem, IonList, IonDatetime, IonLabel, IonDatetimeButton, IonModal, IonNote, IonAccordionGroup, IonAccordion, IonTabButton, IonButton, IonNav } from '@ionic/angular/standalone';
 import { AlertController } from '@ionic/angular';
 import { FirebaseFirestoreService } from 'src/app/services/firebase-firestore.service';
-import { ProductoSave } from 'src/app/types/producto.interface';
+import { Producto, ProductoSave } from 'src/app/types/producto.interface';
 import { Timestamp } from '@angular/fire/firestore';
+import * as moment from 'moment';
 
 function totalNoSuperaPresupuesto(): ValidatorFn {
   return (formValidation: AbstractControl): ValidationErrors | null => {
@@ -28,34 +29,17 @@ function totalNoSuperaPresupuesto(): ValidatorFn {
 export class OperacionProductoPage implements OnInit {
   @Input() operacion = "Crear Producto";
   @Input() idProducto = "";
-  formValidation = this.formBuilder.group({
-    producto: ['', Validators.compose([Validators.required, Validators.nullValidator])],
-    proveedor: ['', Validators.compose([Validators.required, Validators.nullValidator])],
-    unidad: ['', Validators.compose([Validators.required, Validators.nullValidator])],
-    presupuesto: ['', Validators.compose([Validators.required, Validators.pattern(/^[0-9]*$/)])],
-    valorUnitario: ['', Validators.compose([Validators.required, Validators.pattern(/^[0-9]*$/)])],
-    cantidad: ['', Validators.compose([Validators.required, Validators.pattern(/^[0-9]*$/)])],
-    valorTotal: ['', Validators.compose([Validators.pattern(/^[0-9]*$/), totalNoSuperaPresupuesto()])],
-    fechaAdquisicion: [this.todayIs(), Validators.compose([Validators.required])]
-  });
+  @Input() producto!: Producto;
+  formValidation!: FormGroup;
 
   constructor(private formBuilder: NonNullableFormBuilder, private firestore: FirebaseFirestoreService, private navCtrl: IonNav, private alertController: AlertController) {
-    this.formValidation.get('valorUnitario')?.valueChanges.subscribe(() => {
-      this.updateValorTotal();
-    });
-
-    this.formValidation.get('cantidad')?.valueChanges.subscribe(() => {
-      this.updateValorTotal();
-    });
-
-    this.formValidation.get('presupuesto')?.valueChanges.subscribe(() => {
-      this.updateValorTotal();
-    });
   }
 
   ngOnInit() {
-    console.log(this.operacion);
-    console.log(this.idProducto);
+    this.initializeForm();
+    if (this.producto) {
+      this.fillForm(this.producto);
+    }
   }
 
   updateValorTotal() {
@@ -66,11 +50,7 @@ export class OperacionProductoPage implements OnInit {
   }
 
   todayIs(): string {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = (today.getMonth() + 1).toString().padStart(2, '0');
-    const day = today.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
+    return moment().format('YYYY-MM-DD');
   }
 
   onSubmit() {
@@ -79,11 +59,11 @@ export class OperacionProductoPage implements OnInit {
     if (isFormValid) {
       if (this.operacion.toLowerCase() === "crear producto") {
         const productoRaw = this.formValidation.getRawValue();
-        const time: Timestamp = Timestamp.fromDate(new Date(productoRaw.fechaAdquisicion!));
+        const time: Timestamp = Timestamp.fromDate(moment(productoRaw.fechaAdquisicion!, 'YYYY/MM/DD').toDate());
         const producto: ProductoSave = {
           producto: productoRaw.producto!,
           unidad: productoRaw.unidad!,
-          proveedor: productoRaw.producto!,
+          proveedor: productoRaw.proveedor!,
           presupuesto: Number(productoRaw.presupuesto!),
           cantidad: Number(productoRaw.cantidad!),
           valor_unitario: Number(productoRaw.valorUnitario!),
@@ -98,7 +78,69 @@ export class OperacionProductoPage implements OnInit {
           }
         });
       }
+      else if (this.operacion.toLowerCase() === "editar producto") {
+        const productoRaw = this.formValidation.getRawValue();
+        console.log(productoRaw);
+        const time: Timestamp = Timestamp.fromDate(moment(productoRaw.fechaAdquisicion!, 'YYYY/MM/DD').toDate());
+        console.log(time.toDate());
+        const producto: Producto = {
+          id: this.idProducto,
+          producto: productoRaw.producto!,
+          unidad: productoRaw.unidad!,
+          proveedor: productoRaw.proveedor!,
+          presupuesto: Number(productoRaw.presupuesto!),
+          cantidad: Number(productoRaw.cantidad!),
+          valor_unitario: Number(productoRaw.valorUnitario!),
+          valor_total: Number(productoRaw.valorTotal!),
+          fecha_adquisicion: time
+        }
+        this.firestore.updateProduct(this.idProducto, producto).subscribe((res) => {
+          if (res) {
+            this.showAlert("Se actualizo exitosamente");
+          } else {
+            this.showAlert("No se pudo actualizar");
+          }
+        });
+      }
     }
+  }
+
+  initializeForm() {
+    this.formValidation = this.formBuilder.group({
+      producto: ['', Validators.compose([Validators.required, Validators.nullValidator])],
+      proveedor: ['', Validators.compose([Validators.required, Validators.nullValidator])],
+      unidad: ['', Validators.compose([Validators.required, Validators.nullValidator])],
+      presupuesto: ['', Validators.compose([Validators.required, Validators.pattern(/^[0-9]*$/)])],
+      valorUnitario: ['', Validators.compose([Validators.required, Validators.pattern(/^[0-9]*$/)])],
+      cantidad: ['', Validators.compose([Validators.required, Validators.pattern(/^[0-9]*$/)])],
+      valorTotal: ['', Validators.compose([Validators.pattern(/^[0-9]*$/), totalNoSuperaPresupuesto()])],
+      fechaAdquisicion: [this.todayIs(), Validators.compose([Validators.required])]
+    });
+
+    this.formValidation.get('valorUnitario')?.valueChanges.subscribe(() => {
+      this.updateValorTotal();
+    });
+
+    this.formValidation.get('cantidad')?.valueChanges.subscribe(() => {
+      this.updateValorTotal();
+    });
+
+    this.formValidation.get('presupuesto')?.valueChanges.subscribe(() => {
+      this.updateValorTotal();
+    });
+  }
+
+  fillForm(producto: Producto): void {
+    this.formValidation.patchValue({
+      producto: producto.producto,
+      proveedor: producto.proveedor,
+      unidad: producto.unidad,
+      presupuesto: producto.presupuesto.toString(),
+      valorUnitario: producto.valor_unitario.toString(),
+      cantidad: producto.cantidad.toString(),
+      valorTotal: producto.valor_total.toString(),
+      fechaAdquisicion: producto.fecha_adquisicion.toDate().toISOString()
+    });
   }
 
   async showAlert(message: string = "Alerta") {

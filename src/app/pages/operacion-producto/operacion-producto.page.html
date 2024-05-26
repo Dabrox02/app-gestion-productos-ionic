@@ -67,7 +67,7 @@
           </ng-template>
         </ion-modal>
       </ion-item>
-      <ion-button type="submit" expand="block">{{operacion}}</ion-button>
+      <ion-button type="submit" expand="block" [disabled]="formValidation.invalid">{{operacion}}</ion-button>
     </ion-list>
   </form>
 </ion-content>

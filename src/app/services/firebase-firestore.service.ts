@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, CollectionReference, deleteDoc, doc, DocumentData, DocumentReference, Firestore, onSnapshot, QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/firestore';
+import { addDoc, collection, CollectionReference, deleteDoc, doc, DocumentData, DocumentReference, DocumentSnapshot, Firestore, getDoc, onSnapshot, QueryDocumentSnapshot, QuerySnapshot, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Producto, ProductoSave } from '../types/producto.interface';
 
@@ -33,6 +33,21 @@ export class FirebaseFirestoreService {
     });
   }
 
+  getOneProduct(id: string) {
+    const productoDocRef: DocumentReference = doc(this.fireStore, 'productos', id);
+    return new Observable<DocumentSnapshot<any>>((observer) => {
+      getDoc(productoDocRef)
+        .then((data) => {
+          observer.next(data);
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.next(error);
+          observer.complete();
+        });
+    });
+  }
+
   saveProduct(producto: ProductoSave) {
     const productsCollection: CollectionReference = collection(this.fireStore, 'productos');
     return new Observable<boolean>((observer) => {
@@ -49,6 +64,24 @@ export class FirebaseFirestoreService {
         });
     });
   }
+
+  updateProduct(id: string, producto: Partial<ProductoSave>) {
+    const productoDocRef: DocumentReference = doc(this.fireStore, 'productos', id);
+    return new Observable<boolean>((observer) => {
+      updateDoc(productoDocRef, producto)
+        .then(() => {
+          console.log("Se actualizo exitosamente");
+          observer.next(true);
+          observer.complete();
+        })
+        .catch((error) => {
+          console.error("Error al actualizar el producto:", error);
+          observer.next(false);
+          observer.complete();
+        });
+    });
+  }
+
 
   deleteProduct(idProduct: string) {
     if (idProduct) {
