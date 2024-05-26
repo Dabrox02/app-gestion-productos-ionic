@@ -18,10 +18,19 @@ export class ListaProductosComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['productoBuscado']) {
-      const nuevoValor = changes['productoBuscado'].currentValue;
-      const encontrados = this.getProductosBuscados(nuevoValor);
-      this.productosRender = encontrados;
+    if (changes['productos'] || changes['productoBuscado']) {
+      this.actualizarProductosRender();
+    }
+  }
+
+  private actualizarProductosRender() {
+    if (!this.productos) {
+      return;
+    }
+    if (this.productoBuscado.trim() === "") {
+      this.productosRender = this.productos;
+    } else {
+      this.productosRender = this.getProductosBuscados(this.productoBuscado);
     }
   }
 

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { arrowUpOutline } from 'ionicons/icons';
+import { IonNav } from '@ionic/angular/standalone';
+import { OperacionProductoPage } from 'src/app/pages/operacion-producto/operacion-producto.page';
 
 @Component({
   selector: 'app-lista-acciones',
@@ -25,10 +27,13 @@ export class ListaAccionesComponent implements OnInit {
       data: {
         action: 'create',
       },
+      handler: () => {
+        this.navCtrl.push(OperacionProductoPage);
+      }
     }
   ];
 
-  constructor() {
+  constructor(private navCtrl: IonNav) {
     addIcons({ arrowUpOutline });
   }
 

@@ -20,9 +20,13 @@ export class HomePage implements OnInit {
   productoBuscado: string = "";
   loading: boolean = true;
 
-  constructor(public firebaseService: FirebaseFirestoreService) { }
+  constructor(private firebaseService: FirebaseFirestoreService) { }
 
   ngOnInit(): void {
+    this.obtenerProductos();
+  }
+
+  obtenerProductos() {
     this.firebaseService.getAllProducts().subscribe({
       next: (data) => {
         this.productos = data;

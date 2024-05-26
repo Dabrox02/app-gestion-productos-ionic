@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, CollectionReference, Firestore, getDocs, QuerySnapshot, Timestamp } from '@angular/fire/firestore';
+import { addDoc, collection, CollectionReference, deleteDoc, doc, DocumentData, DocumentReference, Firestore, onSnapshot, QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -14,22 +14,32 @@ export class FirebaseFirestoreService {
     addDoc(testCollection, { text: 'Firebase Connected' })
   }
 
-  getAllProducts(): Observable<any[]> {
+  getAllProducts() {
     const productsCollection: CollectionReference = collection(this.fireStore, 'productos');
-    return new Observable(observer => {
-      getDocs(productsCollection).then((querySnapshot: QuerySnapshot<any>) => {
-        const products: any[] = [];
-        querySnapshot.forEach(doc => {
+
+    return new Observable<DocumentData[]>((observer) => {
+      onSnapshot(productsCollection, (snapshot: QuerySnapshot<DocumentData>) => {
+        const products: DocumentData[] = [];
+        snapshot.docs.forEach((doc: QueryDocumentSnapshot<DocumentData>) => {
           const data = doc.data();
           const id = doc.id;
           products.push({ id, ...data });
         });
+        console.log("actualizacion");
         observer.next(products);
-        observer.complete();
-      }).catch(error => {
+      }, (error) => {
         observer.error(error);
       });
     });
+  }
+
+  deleteProduct(idProduct: string) {
+    if (idProduct) {
+      const documentReference: DocumentReference = doc(this.fireStore, `/productos/${idProduct}`);
+      deleteDoc(documentReference).then(() => {
+        console.log("producto eliminado exitosamente");
+      });
+    }
   }
 
 }
