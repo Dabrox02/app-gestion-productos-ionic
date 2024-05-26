@@ -11,3 +11,14 @@ export interface Producto {
     fecha_adquisicion: Timestamp;
     proveedor: string;
 }
+
+export interface ProductoSave {
+    presupuesto: number;
+    unidad: string;
+    producto: string;
+    cantidad: number;
+    valor_unitario: number;
+    valor_total: number;
+    fecha_adquisicion: Timestamp;
+    proveedor: string;
+}

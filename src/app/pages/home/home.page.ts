@@ -30,6 +30,7 @@ export class HomePage implements OnInit {
     this.firebaseService.getAllProducts().subscribe({
       next: (data) => {
         this.productos = data;
+        console.log(data);
         this.loading = false;
       },
       error: (err) => {

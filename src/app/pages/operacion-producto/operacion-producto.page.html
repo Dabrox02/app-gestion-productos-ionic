@@ -12,40 +12,43 @@
     <ion-list>
       <ion-item>
         <ion-input label="Nombre Producto" labelPlacement="stacked" [clearInput]="true"
-          placeholder="Nombre del Producto" formControlName="nombreProducto">
+          placeholder="Nombre del Producto" formControlName="producto">
         </ion-input>
       </ion-item>
 
       <ion-item>
         <ion-input label="Nombre Proveedor" labelPlacement="stacked" [clearInput]="true"
-          placeholder="Nombre del Proveedor">
+          placeholder="Nombre del Proveedor" formControlName="proveedor">
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-input label="Nombre Unidad" labelPlacement="stacked" [clearInput]="true" placeholder="Nombre de la Unidad">
+        <ion-input label="Nombre Unidad" labelPlacement="stacked" [clearInput]="true" placeholder="Nombre de la Unidad"
+          formControlName="unidad">
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-input label="Presupuesto" labelPlacement="stacked" [clearInput]="true"
-          placeholder="Ingrese el Presupuesto">
+        <ion-input label="Presupuesto" labelPlacement="stacked" [clearInput]="true" placeholder="Ingrese el Presupuesto"
+          formControlName="presupuesto">
         </ion-input>
       </ion-item>
 
       <ion-item>
         <ion-input label="Valor Unitario" labelPlacement="stacked" [clearInput]="true"
-          placeholder="Ingrese el Valor Unitario">
+          placeholder="Ingrese el Valor Unitario" formControlName="valorUnitario">
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-input label="Cantidad" labelPlacement="stacked" [clearInput]="true" placeholder="Ingrese la Cantidad">
+        <ion-input label="Cantidad" labelPlacement="stacked" [clearInput]="true" placeholder="Ingrese la Cantidad"
+          formControlName="cantidad">
         </ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-input label="Valor Total" labelPlacement="stacked" [clearInput]="true" [disabled]="true">
+
+        <ion-input label="Valor Total" labelPlacement="stacked" [readonly]="true" formControlName="valorTotal">
         </ion-input>
       </ion-item>
 
@@ -54,7 +57,7 @@
         <ion-datetime-button datetime="datetime"></ion-datetime-button>
         <ion-modal [keepContentsMounted]="true">
           <ng-template>
-            <ion-datetime id="datetime" presentation="date" [formatOptions]="{
+            <ion-datetime id="datetime" presentation="date" formControlName="fechaAdquisicion" [formatOptions]="{
                   date: {
                     weekday: 'short',
                     month: 'long',
@@ -64,6 +67,7 @@
           </ng-template>
         </ion-modal>
       </ion-item>
+      <ion-button type="submit" expand="block">{{operacion}}</ion-button>
     </ion-list>
   </form>
 </ion-content>
