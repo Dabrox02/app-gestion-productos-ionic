@@ -8,9 +8,62 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">crear-producto</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <form [formGroup]="formValidation" (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-input label="Nombre Producto" labelPlacement="stacked" [clearInput]="true"
+          placeholder="Nombre del Producto" formControlName="nombreProducto">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Nombre Proveedor" labelPlacement="stacked" [clearInput]="true"
+          placeholder="Nombre del Proveedor">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Nombre Unidad" labelPlacement="stacked" [clearInput]="true" placeholder="Nombre de la Unidad">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Presupuesto" labelPlacement="stacked" [clearInput]="true"
+          placeholder="Ingrese el Presupuesto">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Valor Unitario" labelPlacement="stacked" [clearInput]="true"
+          placeholder="Ingrese el Valor Unitario">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Cantidad" labelPlacement="stacked" [clearInput]="true" placeholder="Ingrese la Cantidad">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Valor Total" labelPlacement="stacked" [clearInput]="true" [disabled]="true">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Fecha Adquisicion</ion-label>
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime id="datetime" presentation="date" [formatOptions]="{
+                  date: {
+                    weekday: 'short',
+                    month: 'long',
+                    day: '2-digit',
+                  },
+                }"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+    </ion-list>
+  </form>
 </ion-content>

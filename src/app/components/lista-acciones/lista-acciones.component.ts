@@ -15,13 +15,6 @@ import { OperacionProductoPage } from 'src/app/pages/operacion-producto/operacio
 export class ListaAccionesComponent implements OnInit {
   public actionSheetButtons = [
     {
-      text: 'Cancelar',
-      role: 'cancel',
-      data: {
-        action: 'cancel',
-      },
-    },
-    {
       text: 'Crear Producto',
       role: 'create',
       data: {
