@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, CollectionReference, Firestore, getDocs, QuerySnapshot } from '@angular/fire/firestore';
+import { addDoc, collection, CollectionReference, Firestore, getDocs, QuerySnapshot, Timestamp } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -20,7 +20,9 @@ export class FirebaseFirestoreService {
       getDocs(productsCollection).then((querySnapshot: QuerySnapshot<any>) => {
         const products: any[] = [];
         querySnapshot.forEach(doc => {
-          products.push(doc.data());
+          const data = doc.data();
+          const id = doc.id;
+          products.push({ id, ...data });
         });
         observer.next(products);
         observer.complete();

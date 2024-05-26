@@ -13,10 +13,17 @@ import { arrowUpOutline } from 'ionicons/icons';
 export class ListaAccionesComponent implements OnInit {
   public actionSheetButtons = [
     {
-      text: 'Cancel',
+      text: 'Cancelar',
       role: 'cancel',
       data: {
         action: 'cancel',
+      },
+    },
+    {
+      text: 'Crear Producto',
+      role: 'create',
+      data: {
+        action: 'create',
       },
     }
   ];
