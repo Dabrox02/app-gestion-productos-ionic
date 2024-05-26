@@ -1,6 +1,6 @@
 <ion-accordion-group #accordionGroup>
   @if (productos) {
-  @for (item of productos; track $index) {
+  @for (item of productosRender; track $index) {
   <app-producto [producto]="item"></app-producto>
   }
   }

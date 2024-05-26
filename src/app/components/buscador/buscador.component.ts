@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -8,10 +8,13 @@ import { IonicModule } from '@ionic/angular';
   standalone: true,
   imports: [IonicModule]
 })
-export class BuscadorComponent implements OnInit {
+export class BuscadorComponent {
+  @Output() eventEmitBuscador: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
-  ngOnInit() { }
+  onChangeBuscador(e: Event) {
+    this.eventEmitBuscador.emit((e.target as HTMLInputElement).value);
+  }
 
 }

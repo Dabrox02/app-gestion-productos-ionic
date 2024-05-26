@@ -5,8 +5,15 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <app-buscador></app-buscador>
-  <app-lista-productos [productos]="productos$ | async"></app-lista-productos>
+  <app-buscador (eventEmitBuscador)="buscarProducto($event)"></app-buscador>
+  @if (loading) {
+  <ion-item>
+    <ion-spinner name="dots"></ion-spinner>
+  </ion-item>
+  }
+  @if (!loading) {
+  <app-lista-productos [productos]="productos" [productoBuscado]="productoBuscado"></app-lista-productos>
+  }
 </ion-content>
 
 <ion-footer [translucent]="true">
