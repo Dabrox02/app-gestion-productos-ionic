@@ -6,7 +6,7 @@ import { AlertController } from '@ionic/angular';
 import { FirebaseFirestoreService } from 'src/app/services/firebase-firestore.service';
 import { Producto, ProductoSave } from 'src/app/types/producto.interface';
 import { Timestamp } from '@angular/fire/firestore';
-import * as moment from 'moment';
+import moment from 'moment';
 
 function totalNoSuperaPresupuesto(): ValidatorFn {
   return (formValidation: AbstractControl): ValidationErrors | null => {

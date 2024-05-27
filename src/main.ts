@@ -21,10 +21,8 @@ bootstrapApplication(AppComponent, {
     provideIonicAngular(),
     provideHttpClient(),
     provideRouter(routes),
-    importProvidersFrom(
-      provideFirebaseApp(() => initializeApp(environment.FIREBASE_CONFIG)),
-      provideFirestore(() => getFirestore()),
-      provideAuth(() => getAuth())
-    )
+    provideFirebaseApp(() => initializeApp(environment.FIREBASE_CONFIG)),
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth())
   ],
 });
