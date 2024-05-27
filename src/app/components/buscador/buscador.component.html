@@ -1,1 +1,5 @@
-<ion-searchbar placeholder="Buscar Producto o Unidad" (ionInput)="onChangeBuscador($event)"></ion-searchbar>
+<ion-item class="input-search">
+    <ion-input placeholder="Buscar Producto o Unidad" (ionInput)="onChangeBuscador($event)" [clearInput]="true">
+        <ion-icon slot="start" name="search-outline"></ion-icon>
+    </ion-input>
+</ion-item>

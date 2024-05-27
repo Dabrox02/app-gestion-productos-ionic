@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { arrowUpOutline } from 'ionicons/icons';
+import { createOutline } from 'ionicons/icons';
 import { IonNav } from '@ionic/angular/standalone';
 import { OperacionProductoPage } from 'src/app/pages/operacion-producto/operacion-producto.page';
 
@@ -13,23 +13,14 @@ import { OperacionProductoPage } from 'src/app/pages/operacion-producto/operacio
   imports: [IonicModule]
 })
 export class ListaAccionesComponent implements OnInit {
-  public actionSheetButtons = [
-    {
-      text: 'Crear Producto',
-      role: 'create',
-      data: {
-        action: 'create',
-      },
-      handler: () => {
-        this.navCtrl.push(OperacionProductoPage);
-      }
-    }
-  ];
-
   constructor(private navCtrl: IonNav) {
-    addIcons({ arrowUpOutline });
+    addIcons({ createOutline });
   }
 
   ngOnInit() { }
+
+  showOperacion() {
+    this.navCtrl.push(OperacionProductoPage);
+  }
 
 }

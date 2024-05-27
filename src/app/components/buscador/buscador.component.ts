@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { searchOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-buscador',
@@ -11,7 +13,9 @@ import { IonicModule } from '@ionic/angular';
 export class BuscadorComponent {
   @Output() eventEmitBuscador: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() { }
+  constructor() {
+    addIcons({ searchOutline })
+  }
 
   onChangeBuscador(e: Event) {
     this.eventEmitBuscador.emit((e.target as HTMLInputElement).value);
