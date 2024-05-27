@@ -1,0 +1,26 @@
+<ion-header class="smooth-border" [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Gestion de Productos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-buscador (eventEmitBuscador)="buscarProducto($event)"></app-buscador>
+  @if (loading) {
+  <ion-item>
+    <ion-spinner name="dots"></ion-spinner>
+  </ion-item>
+  }
+  @if (!loading) {
+  <app-lista-productos [productos]="productos" [productoBuscado]="productoBuscado"></app-lista-productos>
+  }
+</ion-content>
+
+<ion-footer [translucent]="true">
+  <app-lista-acciones></app-lista-acciones>
+</ion-footer>

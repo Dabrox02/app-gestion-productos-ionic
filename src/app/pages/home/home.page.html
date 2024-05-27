@@ -1,21 +1,3 @@
-<ion-header class="smooth-border" [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Gestion de Productos</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <app-buscador (eventEmitBuscador)="buscarProducto($event)"></app-buscador>
-  @if (loading) {
-  <ion-item>
-    <ion-spinner name="dots"></ion-spinner>
-  </ion-item>
-  }
-  @if (!loading) {
-  <app-lista-productos [productos]="productos" [productoBuscado]="productoBuscado"></app-lista-productos>
-  }
+<ion-content>
+  <ion-nav [root]="homeAppPage"></ion-nav>
 </ion-content>
-
-<ion-footer [translucent]="true">
-  <app-lista-acciones></app-lista-acciones>
-</ion-footer>

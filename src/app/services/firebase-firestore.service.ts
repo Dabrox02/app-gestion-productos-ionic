@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { addDoc, collection, CollectionReference, deleteDoc, doc, DocumentData, DocumentReference, DocumentSnapshot, Firestore, getDoc, onSnapshot, QueryDocumentSnapshot, QuerySnapshot, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Producto, ProductoSave } from '../types/producto.interface';
+import { ProductoSave } from '../types/producto.interface';
 
 @Injectable({
   providedIn: 'root'

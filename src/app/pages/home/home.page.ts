@@ -1,46 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonRouterOutlet, IonFooter, IonSpinner, IonItem } from '@ionic/angular/standalone';
-import { FirebaseFirestoreService } from 'src/app/services/firebase-firestore.service';
-import { BuscadorComponent } from "../../components/buscador/buscador.component";
-import { ListaAccionesComponent } from "../../components/lista-acciones/lista-acciones.component";
-import { ListaProductosComponent } from "../../components/lista-productos/lista-productos.component";
+import { Component } from "@angular/core";
+import { HomeAppPage } from "./home-app/home-app.page";
+import { IonContent, IonNav } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [IonItem, IonSpinner, IonFooter, IonRouterOutlet, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, BuscadorComponent, ListaAccionesComponent, ListaProductosComponent]
+  imports: [IonNav, IonContent, ]
 })
-export class HomePage implements OnInit {
+export class HomePage {
+  homeAppPage = HomeAppPage;
 
-  productos!: any[];
-  productoBuscado: string = "";
-  loading: boolean = true;
-
-  constructor(private firebaseService: FirebaseFirestoreService) { }
-
-  ngOnInit(): void {
-    this.obtenerProductos();
-  }
-
-  obtenerProductos() {
-    this.firebaseService.getAllProducts().subscribe({
-      next: (data) => {
-        this.productos = data;
-        console.log(data);
-        this.loading = false;
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
-  }
-
-  buscarProducto($event: string) {
-    this.productoBuscado = $event;
-  }
+  constructor() { }
 
 }
