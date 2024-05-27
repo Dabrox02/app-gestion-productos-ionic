@@ -82,7 +82,6 @@ export class OperacionProductoPage implements OnInit {
         const productoRaw = this.formValidation.getRawValue();
         console.log(productoRaw);
         const time: Timestamp = Timestamp.fromDate(moment(productoRaw.fechaAdquisicion!, 'YYYY/MM/DD').toDate());
-        console.log(time.toDate());
         const producto: Producto = {
           id: this.idProducto,
           producto: productoRaw.producto!,

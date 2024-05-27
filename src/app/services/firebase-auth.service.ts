@@ -1,6 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Auth, authState, signInWithEmailAndPassword } from '@angular/fire/auth';
-import { Router } from '@angular/router';
+import { Auth, authState, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { from, Observable } from 'rxjs';
 
 @Injectable({
@@ -10,7 +9,6 @@ export class FirebaseAuthService {
 
   private auth: Auth = inject(Auth);
   readonly authState$ = authState(this.auth);
-  private router$ = inject(Router);
 
   constructor() { }
 
@@ -19,7 +17,7 @@ export class FirebaseAuthService {
   }
 
   logout() {
-    return this.auth.signOut();
+    return signOut(this.auth);
   }
 
 }

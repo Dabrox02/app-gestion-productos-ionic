@@ -25,7 +25,6 @@ export class FirebaseFirestoreService {
           const id = doc.id;
           products.push({ id, ...data });
         });
-        console.log("actualizacion");
         observer.next(products);
       }, (error) => {
         observer.error(error);
@@ -70,12 +69,10 @@ export class FirebaseFirestoreService {
     return new Observable<boolean>((observer) => {
       updateDoc(productoDocRef, producto)
         .then(() => {
-          console.log("Se actualizo exitosamente");
           observer.next(true);
           observer.complete();
         })
         .catch((error) => {
-          console.error("Error al actualizar el producto:", error);
           observer.next(false);
           observer.complete();
         });
