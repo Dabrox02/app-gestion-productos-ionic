@@ -77,7 +77,7 @@ To edit, an interface similar to that of adding the product will appear with the
 
 ## Authors
 
-- [johanp0308](https://github.com/johanp0308)
-- [Dabrox02](https://github.com/Dabrox02)
-- [Dark](https://github.com/DarkConecta)
+- [johanp0308](https://github.com/johanp0308) Johan Sebastian Pachon Mojica
+- [Dabrox02](https://github.com/Dabrox02) Jaider Stiven Mendoza Cardona
+- [DarkConecta](https://github.com/DarkConecta) Marlon Alberto Sosa Garcia
 
