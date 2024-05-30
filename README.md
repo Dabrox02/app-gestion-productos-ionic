@@ -62,7 +62,7 @@ Después de eso, aparecerá una lista de los productos. También arriba aparecer
 
 También debajo está el botón agregar donde si hacemos clic en él nos aparecerá una interfaz para agregar el producto.
 
-![](./img/add-producto.jpeg)
+![](./img/add-producto.jpg)
 
 
 También tienes la opción de editar y eliminar productos específicos, estos aparecen como un botón en la información del producto:
