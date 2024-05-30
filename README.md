@@ -37,6 +37,10 @@ Instalar angular:
 - Ionic/Angular
 - Typescript
 
+## Maqutacion y diseño
+
+![](./img/wireframe-app.jpeg)
+
 
 ## Documentación
 
