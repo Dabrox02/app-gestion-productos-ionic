@@ -38,7 +38,7 @@ Instalar angular:
 - Typescript
 
 ## Maqutacion y diseño
-
+Aqui esta el modelo en que nos basamos para las funcionalidad y fluides del aplicativo
 ![](./img/wireframe-app.jpeg)
 
 
