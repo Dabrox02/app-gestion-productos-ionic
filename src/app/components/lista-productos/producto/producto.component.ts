@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Producto } from 'src/app/types/producto.interface';
-import { IonAccordion, IonItem, IonLabel, IonBadge, IonList, IonButton, IonNav, IonAlert } from '@ionic/angular/standalone';
+import { IonAccordion, IonItem, IonLabel, IonBadge, IonList, IonButton, IonNav, IonAlert, IonGrid, IonRow, IonCol } from '@ionic/angular/standalone';
 import { Timestamp } from '@angular/fire/firestore';
 import { CurrencyPipePipe } from "../../../utils/currency-pipe.pipe";
 import { OperacionProductoPage } from 'src/app/pages/operacion-producto/operacion-producto.page';
@@ -11,20 +11,22 @@ import { FirebaseFirestoreService } from 'src/app/services/firebase-firestore.se
   templateUrl: './producto.component.html',
   styleUrls: ['./producto.component.scss'],
   standalone: true,
-  imports: [IonAlert, IonButton, IonList, IonBadge, IonLabel, IonItem, IonAccordion, CurrencyPipePipe]
+  imports: [IonCol, IonRow, IonGrid, IonAlert, IonButton, IonList, IonBadge, IonLabel, IonItem, IonAccordion, CurrencyPipePipe]
 })
 export class ProductoComponent {
   @Input() producto!: Producto;
   alertButtons = [{
     text: "Confirmar",
     role: "confirm",
+    cssClass: 'alert-button-confirm',
     handler: () => {
       this.deleteProduct();
     }
   },
   {
     text: 'Cancelar',
-    role: 'cancel'
+    role: 'cancel',
+    cssClass: 'alert-button-cancel',
   },
   ];
 
