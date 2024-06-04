@@ -1,4 +1,11 @@
+ion-datetime {
+    color: black;
+}
+
+ion-datetime-button::part(native) {
+    color: black;
+}
+
 .smooth-border {
     box-shadow: 0px 5px 0px -4px rgba(0, 0, 0, 0.3);
-    text-align: center;
 }
