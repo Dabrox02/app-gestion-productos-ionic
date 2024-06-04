@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonList, IonInput, IonButton, IonItem, IonCardContent, IonRow, IonGrid, IonCol, IonCard, IonLabel, IonTabButton, IonCardTitle } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonList, IonInput, IonButton, IonItem, IonCardContent, IonRow, IonGrid, IonCol, IonCard, IonLabel, IonTabButton, IonCardTitle, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { FirebaseAuthService } from 'src/app/services/firebase-auth.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -11,7 +11,7 @@ import { AlertController } from '@ionic/angular';
   templateUrl: './loading-app.page.html',
   styleUrls: ['./loading-app.page.scss'],
   standalone: true,
-  imports: [IonCardTitle, IonTabButton, IonLabel, IonCard, IonCol, IonGrid, IonRow, IonCardContent, IonItem, IonButton, IonInput, IonList, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [IonFabButton, IonFab, IonCardTitle, IonTabButton, IonLabel, IonCard, IonCol, IonGrid, IonRow, IonCardContent, IonItem, IonButton, IonInput, IonList, IonIcon, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class LoadingAppPage implements OnInit {
   formValidation: FormGroup = this.formBuilder.group({

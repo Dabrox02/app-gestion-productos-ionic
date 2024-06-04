@@ -1,6 +1,19 @@
+ion-input {
+    --color: white;
+    --highlight-color-focused: rgb(200, 233, 255);
+}
+
+ion-button {
+    --background: #5E7CE2;
+}
+
+ion-fab-button.button-github {
+    --background: #5E7CE2;
+}
+
 .header-card {
     text-align: center;
     font-weight: light;
     font-size: 1.2rem;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    color: white;
 }
