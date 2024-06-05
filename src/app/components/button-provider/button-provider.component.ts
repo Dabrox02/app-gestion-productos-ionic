@@ -4,6 +4,7 @@ import { FirebaseAuthService } from 'src/app/services/firebase-auth.service';
 import { AlertController } from '@ionic/angular';
 import { IonButton, IonIcon } from "@ionic/angular/standalone";
 
+
 @Component({
   standalone: true,
   selector: 'app-button-provider',
@@ -13,7 +14,8 @@ import { IonButton, IonIcon } from "@ionic/angular/standalone";
 })
 export class ButtonProviderComponent {
 
-  constructor(private authService: FirebaseAuthService, private router: Router, private alertController: AlertController) { }
+  constructor(private authService: FirebaseAuthService, private router: Router, private alertController: AlertController) {
+  }
 
   providerAction(provider: string) {
     if (provider === 'google') {

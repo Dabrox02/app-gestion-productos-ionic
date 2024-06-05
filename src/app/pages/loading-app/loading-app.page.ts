@@ -38,7 +38,7 @@ export class LoadingAppPage {
             this.router.navigateByUrl("/");
           },
           error: (err) => {
-            this.showAlert("Error al iniciar Sesion")
+            this.showAlert("Error al iniciar Sesion ")
           }
         }
         );
