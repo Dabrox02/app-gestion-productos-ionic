@@ -14,7 +14,7 @@ export class BuscadorComponent {
   @Output() eventEmitBuscador: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {
-    addIcons({ searchOutline })
+    addIcons({ searchOutline });
   }
 
   onChangeBuscador(e: Event) {

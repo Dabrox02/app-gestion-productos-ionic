@@ -15,7 +15,11 @@
               <ion-input type="password" fill="outline" label="Clave Aplicacion" labelPlacement="floating"
                 formControlName="clave"></ion-input>
               <br>
-              <ion-button expand="block" type="submit">Ingresar</ion-button>
+              <ion-button expand="block" type="submit">
+                <ion-icon slot="start" name="enter-outline"></ion-icon>
+                Ingresar
+              </ion-button>
+              <app-button-provider></app-button-provider>
             </form>
           </ion-card-content>
         </ion-card>
