@@ -21,6 +21,10 @@ export class FirebaseAuthService {
     return from(signInWithPopup(this.auth, provider));
   }
 
+  getCurrentUserUid(): Promise<string | null> {
+    return this.getCurrentUserUid();
+  }
+
   logout() {
     return signOut(this.auth);
   }

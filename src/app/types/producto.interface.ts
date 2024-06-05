@@ -1,6 +1,7 @@
 import { Timestamp } from "@angular/fire/firestore";
 
 export interface Producto {
+    uid: string;
     id: string;
     presupuesto: number;
     unidad: string;
@@ -13,6 +14,7 @@ export interface Producto {
 }
 
 export interface ProductoSave {
+    uid: string;
     presupuesto: number;
     unidad: string;
     producto: string;

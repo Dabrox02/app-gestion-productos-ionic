@@ -57,7 +57,7 @@
         <ion-datetime-button datetime="datetime"></ion-datetime-button>
         <ion-modal [keepContentsMounted]="true">
           <ng-template>
-            <ion-datetime id="datetime" presentation="date" formControlName="fechaAdquisicion" [formatOptions]="{
+            <ion-datetime id="datetime" presentation="date" formControlName="fechaAdquisicion" [max]="todayIs()" [formatOptions]="{
                   date: {
                     weekday: 'short',
                     month: 'long',

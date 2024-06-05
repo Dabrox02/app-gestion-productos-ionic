@@ -23,7 +23,7 @@ export class HomeAppPage implements OnInit {
   productoBuscado: string = "";
   loading: boolean = true;
 
-  constructor(private firebaseService: FirebaseFirestoreService, private authService: FirebaseAuthService, private router: Router) {
+  constructor(private firebaseService: FirebaseFirestoreService, private auth: FirebaseAuthService, private router: Router) {
     addIcons({ logOut });
   }
 
@@ -32,15 +32,21 @@ export class HomeAppPage implements OnInit {
   }
 
   obtenerProductos() {
-    this.firebaseService.getAllProducts().subscribe({
-      next: (data) => {
-        this.productos = data;
-        this.loading = false;
-      },
-      error: (err) => {
-        console.log(err);
+    this.auth.authState$.subscribe({
+      next: (res) => {
+        if (res && res.uid) {
+          this.firebaseService.getAllProducts(res.uid).subscribe({
+            next: (data) => {
+              this.productos = data;
+              this.loading = false;
+            },
+            error: (err) => {
+              console.log(err);
+            }
+          });
+        }
       }
-    });
+    })
   }
 
   buscarProducto($event: string) {
@@ -48,7 +54,7 @@ export class HomeAppPage implements OnInit {
   }
 
   logout() {
-    this.authService.logout().then(() => {
+    this.auth.logout().then(() => {
       this.router.navigateByUrl("/loading-app");
     });
   }

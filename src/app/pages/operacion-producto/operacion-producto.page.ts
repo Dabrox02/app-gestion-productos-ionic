@@ -7,6 +7,7 @@ import { FirebaseFirestoreService } from 'src/app/services/firebase-firestore.se
 import { Producto, ProductoSave } from 'src/app/types/producto.interface';
 import { Timestamp } from '@angular/fire/firestore';
 import moment from 'moment';
+import { FirebaseAuthService } from 'src/app/services/firebase-auth.service';
 
 function totalNoSuperaPresupuesto(): ValidatorFn {
   return (formValidation: AbstractControl): ValidationErrors | null => {
@@ -30,9 +31,11 @@ export class OperacionProductoPage implements OnInit {
   @Input() operacion = "Crear Producto";
   @Input() idProducto = "";
   @Input() producto!: Producto;
+  @Input() currentUid: string = "";
   formValidation!: FormGroup;
+  userUid!: string;
 
-  constructor(private formBuilder: NonNullableFormBuilder, private firestore: FirebaseFirestoreService, private navCtrl: IonNav, private alertController: AlertController) {
+  constructor(private formBuilder: NonNullableFormBuilder, private firestore: FirebaseFirestoreService, private auth: FirebaseAuthService, private navCtrl: IonNav, private alertController: AlertController) {
   }
 
   ngOnInit() {
@@ -40,6 +43,13 @@ export class OperacionProductoPage implements OnInit {
     if (this.producto) {
       this.fillForm(this.producto);
     }
+    this.auth.authState$.subscribe({
+      next: (res) => {
+        if (res && res.uid) {
+          this.userUid = res.uid;
+        }
+      }
+    });
   }
 
   updateValorTotal() {
@@ -56,11 +66,12 @@ export class OperacionProductoPage implements OnInit {
   onSubmit() {
     const isFormValid = this.formValidation.valid;
     console.log(this.formValidation);
-    if (isFormValid) {
+    if (isFormValid && this.userUid) {
       if (this.operacion.toLowerCase() === "crear producto") {
         const productoRaw = this.formValidation.getRawValue();
         const time: Timestamp = Timestamp.fromDate(moment(productoRaw.fechaAdquisicion!, 'YYYY/MM/DD').toDate());
         const producto: ProductoSave = {
+          uid: this.userUid,
           producto: productoRaw.producto!,
           unidad: productoRaw.unidad!,
           proveedor: productoRaw.proveedor!,
@@ -72,6 +83,7 @@ export class OperacionProductoPage implements OnInit {
         }
         this.firestore.saveProduct(producto).subscribe((res) => {
           if (res) {
+            this.formValidation.reset();
             this.showAlert("Se agrego exitosamente");
           } else {
             this.showAlert("No se pudo agregar");
@@ -83,6 +95,7 @@ export class OperacionProductoPage implements OnInit {
         console.log(productoRaw);
         const time: Timestamp = Timestamp.fromDate(moment(productoRaw.fechaAdquisicion!, 'YYYY/MM/DD').toDate());
         const producto: Producto = {
+          uid: this.userUid,
           id: this.idProducto,
           producto: productoRaw.producto!,
           unidad: productoRaw.unidad!,
@@ -95,6 +108,7 @@ export class OperacionProductoPage implements OnInit {
         }
         this.firestore.updateProduct(this.idProducto, producto).subscribe((res) => {
           if (res) {
+            this.formValidation.reset();
             this.showAlert("Se actualizo exitosamente");
           } else {
             this.showAlert("No se pudo actualizar");
