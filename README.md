@@ -55,13 +55,13 @@ De forma predeterminada, la aplicación se ejecutará en http://localhost:8100
 
 Esta imagen aparecerá donde se debe lograr:
 
-![](./img/login-app.jpeg)
-![](./img/loging-acces.jpeg.jpeg)
+![](./img/login-app.JPG)
+![](./img/loging-acces.JPG)
 
 Después de eso, aparecerá una lista de los productos. También arriba aparecerá un buscador de los productos por nombre.
 
-![](./img/list-product.jpeg)
-![](./img/search-product.jpeg)
+![](./img/list-product.JPG)
+![](./img/search-product.JPG)
 
 
 También debajo está el botón agregar donde si hacemos clic en él nos aparecerá una interfaz para agregar el producto.
@@ -71,15 +71,15 @@ También debajo está el botón agregar donde si hacemos clic en él nos aparece
 
 También tienes la opción de editar y eliminar productos específicos, estos aparecen como un botón en la información del producto:
 
-![](./img/info-product.jpeg)
+![](./img/info-product.JPG)
 
 Para eliminar, haga clic en la opción eliminar y aparecerá una alerta que le pedirá confirmación para eliminar el elemento:
 
-![](./img/delete-product.jpeg)
+![](./img/delete-product.JPG)
 
 Para editar aparecerá una interfaz similar a la de agregar el producto con los datos del producto para editarlo:
 
-![](./img/edit-product.jpeg)
+![](./img/edit-product.JPG)
 
 ## Autores
 
