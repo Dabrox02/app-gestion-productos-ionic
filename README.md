@@ -58,6 +58,10 @@ Esta imagen aparecerá donde se debe lograr:
 ![](./img/login-app.JPG)
 ![](./img/loging-acces.JPG)
 
+Para logearse use este usuario de prueba:
+usuario: usuario@user.xyz
+contraseña: 123456
+
 Después de eso, aparecerá una lista de los productos. También arriba aparecerá un buscador de los productos por nombre.
 
 ![](./img/list-product.JPG)
